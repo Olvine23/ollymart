@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:ollymart/screens/homescreen/homescreen.dart';
+import 'package:ollymart/screens/shopscreen/shop_screen.dart';
 import 'package:ollymart/utils/colors.dart';
 import 'package:ollymart/widgets/custom_button.dart';
 import 'package:ollymart/widgets/search_widget.dart';
@@ -15,26 +17,16 @@ class _HomepageState extends State<Homepage> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Center(
-      child: Text(
-        'Home',
-        style: optionStyle,
-      ),
-    ),
-    Center(
-      child: Text(
-        'Shop',
-        style: optionStyle,
-      ),
-    ),
-    Center(
+  static  final List<Widget> _widgetOptions = <Widget>[
+    Homescreen(),
+   const ShopScreen(),
+    const Center(
       child: Text(
         'Search',
         style: optionStyle,
       ),
     ),
-    SingleChildScrollView(
+    const SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.all(16.0),
         child: Text(
@@ -50,7 +42,8 @@ class _HomepageState extends State<Homepage> {
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        elevation: 0,
+       backgroundColor: Colors.transparent,
         leading: const Padding(
           padding: EdgeInsets.only(left: 12),
           child: CustomButton(
@@ -73,7 +66,7 @@ class _HomepageState extends State<Homepage> {
       body: _widgetOptions[_selectedIndex],
       bottomNavigationBar: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
           child: Container(
             decoration: BoxDecoration(
               color: Colors.white,
@@ -93,6 +86,7 @@ class _HomepageState extends State<Homepage> {
               scrollDirection: Axis.horizontal,
               child: GNav(
                 gap: 7,
+                iconSize: 20,
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 tabBackgroundColor: AppColors.utilColor,
                 activeColor: AppColors.secondaryColor,
@@ -106,6 +100,7 @@ class _HomepageState extends State<Homepage> {
                 },
                 tabs: [
                   GButton(
+                       textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                     icon: Icons.home,
                     leading: Container(
                       decoration: BoxDecoration(
@@ -116,7 +111,7 @@ class _HomepageState extends State<Homepage> {
                                 .white, // Background color for selected icon
                         shape: BoxShape.circle,
                       ),
-                      padding: const EdgeInsets.all(6),
+                      padding: const EdgeInsets.all(4),
                       child: Icon(
                         Icons.home,
                         color: _selectedIndex == 0
@@ -127,6 +122,7 @@ class _HomepageState extends State<Homepage> {
                     text: "Home",
                   ),
                   GButton(
+                       textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                     icon: Icons.favorite,
                     leading: Container(
                       decoration: BoxDecoration(
@@ -136,7 +132,7 @@ class _HomepageState extends State<Homepage> {
                         border: Border.all(color: Colors.black),
                         shape: BoxShape.circle,
                       ),
-                      padding: const EdgeInsets.all(6),
+                      padding: const EdgeInsets.all(4),
                       child: Icon(
                         Icons.shopify,
                         color: _selectedIndex == 1
@@ -147,6 +143,7 @@ class _HomepageState extends State<Homepage> {
                     text: "Shop",
                   ),
                   GButton(
+                       textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                     icon: Icons.search, // Required dummy icon
                     leading: Container(
                       decoration: BoxDecoration(
@@ -156,7 +153,7 @@ class _HomepageState extends State<Homepage> {
                             : Colors.white, // Background colo
                         shape: BoxShape.circle,
                       ),
-                      padding: const EdgeInsets.all(6),
+                      padding: const EdgeInsets.all(4),
                       child: Icon(
                         _selectedIndex == 2
                             ? Icons.favorite
@@ -169,6 +166,7 @@ class _HomepageState extends State<Homepage> {
                     text: "Wishlist",
                   ),
                   GButton(
+                    textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                     icon: Icons.person_2_outlined,
                     leading: Container(
                       decoration: BoxDecoration(
